@@ -1,6 +1,10 @@
 # Basic Progress Bar
+Progress bar with no dependencies.
 
-## Progress bar with no dependencies.
+[![Pypi](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml)
+![PyPI](https://img.shields.io/pypi/v/basicprogressbar)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/basicprogressbar)
+
 <br/>
 
 installation:
@@ -49,9 +53,8 @@ print()
 <br/>
 
 # Discord Progress Bar:
-## Progress bar for discord
+Progress bar for discord
 ##### Dependencies: requests, time
-###### might be made into seperate package
 <br/>
 
 installation:
@@ -70,7 +73,7 @@ Arguments:
     timeout:float=10.0          # discord timeout
 ```
 
-example:
+Examples:
 ```python
 # all examples from BasicProgressBar apply
 token = "23135245523/f43faDSAF-FEAfe24f3qfq-2yfbB-agdagADGA-g334t34gqarGS"

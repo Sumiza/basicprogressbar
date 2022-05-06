@@ -1,6 +1,8 @@
 # Basic Progress Bar
 
-## Progress bar with no dependencies.
+[![Pypi](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml)
+
+#### Progress bar with no dependencies.
 <br/>
 
 installation:
@@ -49,7 +51,7 @@ print()
 <br/>
 
 # Discord Progress Bar:
-## Progress bar for discord
+#### Progress bar for discord
 ##### Dependencies: requests, time
 ###### might be made into seperate package
 <br/>

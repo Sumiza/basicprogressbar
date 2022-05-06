@@ -1,7 +1,8 @@
 # Basic Progress Bar
 
 [![Pypi](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml)
-
+![PyPI](https://img.shields.io/pypi/v/basicprogressbar)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/basicprogressbar)
 #### Progress bar with no dependencies.
 <br/>
 

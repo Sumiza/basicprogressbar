@@ -14,13 +14,13 @@ from basicprogressbar import BasicProgressBar
 
 Arguments:
 ```python
-    current:float = 0       # current progress
-    total:float = -1        # total progress '-1' for unlimited
-    posttext:str=""         # text behind the bar
-    pretext:str="Progress:" # text before the bar
-    length:int=60           # length of the bar
-    endtext:str=""          # text after the bar when done
-    endline:str='\r'        # endline character to rewite same line
+current:float = 0       # current progress
+total:float = -1        # total progress '-1' for unlimited
+posttext:str=""         # text behind the bar
+pretext:str="Progress:" # text before the bar
+length:int=60           # length of the bar
+endtext:str=""          # text after the bar when done
+endline:str='\r'        # endline character to rewite same line
 ```
 
 Basic Examples:
@@ -44,10 +44,12 @@ for i in range(11):
     prog.posttext = f"processing {i}"
     print(prog.bar(),end=prog.endline)
 
+# .next() function Increment current by 1
+# return when False or print progress bar when True
 prog = BasicProgressBar()
 for i in range(10):
     time.sleep(0.1)
-    print(prog.next(),end="\r") # Increment current by 1, return when False or print progress bar when True
+    print(prog.next(),end="\r") 
 print()
 ```
 <br/>
@@ -63,14 +65,14 @@ from basicprogressbar import DiscordProgressBar
 ```
 Arguments:
 ```python
-    # All the arguments of from BasicProgressBar first
-    idtoken:str=""              # discord id token
-    disuser:str="Progress Bar"  # name of discord user
-    throttle:float=0.5          # time between messages
-    # shouldnt have to edit the ones below
-    messtime:float=0.0          # time used for waiting between messages
-    messid:str=None             # message id to edit line
-    timeout:float=10.0          # discord timeout
+# All the arguments of from BasicProgressBar first
+idtoken:str=""              # discord id token
+disuser:str="Progress Bar"  # name of discord user
+throttle:float=0.5          # time between messages
+# shouldnt have to edit the ones below
+messtime:float=0.0          # time used for waiting between messages
+messid:str=None             # message id to edit line
+timeout:float=10.0          # discord timeout
 ```
 
 Examples:
@@ -90,8 +92,9 @@ for i in range(1,101):
     prog.current = i
     prog.send()
 
+# .next() Increment current by 1, and sends bar to discord
 prog = DiscordProgressBar(total=100, idtoken=token)
 for i in range(1,101):
     time.sleep(0.1)
-    prog.next() # Increment current by 1, and sends bar to discord
+    prog.next()
 ```

@@ -47,14 +47,14 @@ for i in range(11):
 prog = BasicProgressBar()
 for i in range(10):
     time.sleep(0.1)
-    print(prog.next(),end="\r")
+    print(prog.next(),end="\r") # Increment current by 1, return when False or print progress bar when True
 print()
 ```
 <br/>
 
 # Discord Progress Bar:
 Progress bar for discord
-##### Dependencies: requests, time
+##### Dependencies: Built-in Python Libraries
 <br/>
 
 installation:
@@ -69,7 +69,7 @@ Arguments:
     throttle:float=0.5          # time between messages
     # shouldnt have to edit the ones below
     messtime:float=0.0          # time used for waiting between messages
-    messid:str=""               # message id to edit line
+    messid:str=None             # message id to edit line
     timeout:float=10.0          # discord timeout
 ```
 
@@ -93,5 +93,5 @@ for i in range(1,101):
 prog = DiscordProgressBar(total=100, idtoken=token)
 for i in range(1,101):
     time.sleep(0.1)
-    prog.next()
+    prog.next() # Increment current by 1, and sends bar to discord
 ```

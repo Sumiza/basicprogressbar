@@ -1,6 +1,7 @@
 """
     Basic progress bar with no dependencies*
 """
+
 class BasicProgressBar:
     """
         Basic progress bar with no dependencies
@@ -12,7 +13,8 @@ class BasicProgressBar:
                 pretext:str="Progress:",
                 length:int=60,
                 endtext:str="",
-                endline:str='\r'):
+                endline:str='\r',
+                showtimer=False):
 
         self.current = current
         self.total = total
@@ -23,11 +25,35 @@ class BasicProgressBar:
         self.endline = endline
         self.barfill = None
         self.percent = None
+        self.remainingtime = ""
+        self.showtimer = showtimer
+        if self.showtimer:
+            import time
+            self.timerlist = []
 
     def buildbar(self):
         """
             Generate Progress Bar
         """
+        """
+        timer calculations
+        """
+        if self.showtimer:
+            self.timerlist.append(time.time())
+            while len(self.timerlist) > 10:
+                self.timerlist.pop(0)
+            avgtime = 0
+            for i in self.timerlist:
+                avgtime += i
+            if len(self.timerlist) > 2: 
+                diff = round(sum([self.timerlist[i+1]-self.timerlist[i] for i in range(len(self.timerlist)-1)])/(len(self.timerlist)-1),2)
+                diff = int(round(diff*(self.total-self.current),0))
+                try:
+                    import secondstotext
+                    self.remainingtime = secondstotext.Sectxt(diff)
+                except:
+                    self.remainingtime = str(diff)+' Seconds'
+        
         if self.total == -1: # endless progress bar
             if self.barfill == None or self.barfill[0] == "█":
                 barchar = "░██░"
@@ -44,13 +70,14 @@ class BasicProgressBar:
                 if self.endtext != "":
                     self.posttext = self.endtext+" "*(len(str(self.posttext))-len(str(self.endtext))) 
                     # add space to posttext if it is shorter than endtext
-            return f"{self.pretext} {self.barfill} {self.percent}% [{self.current}/{self.total}] {self.posttext}"
+            return f"{self.pretext} {self.barfill} {self.percent}% [{self.current}/{self.total}] {self.posttext}{self.remainingtime}"
 
     def bar(self,printbar:bool=False):
         """
             Print or return Progress Bar
         """
         if printbar:
+            print(" "*os.get_terminal_size()[0],end="\r")
             print(self.buildbar(),end=self.endline)
         else:
             return self.buildbar()
@@ -114,3 +141,15 @@ class DiscordProgressBar(BasicProgressBar):
                     pass
             self.messtime = time.time()
         return self.messid,self.messtime
+import os
+total = 7000
+a = BasicProgressBar(total=total,showtimer=True)
+import time
+for i in range(total+1):
+    a.current = i
+    
+    a.bar(True)
+    time.sleep(0.005)
+
+# 
+# print(os.get_terminal_size())

@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="basicprogressbar",
-    version="1.0.1",
+    version="1.1.0",
     author="Sumiza",
     author_email="sumiza@gmail.com",
     description="Basic progress bar and discord progress bar",

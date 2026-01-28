@@ -1,4 +1,6 @@
 """
     import files
 """
-from .basicprogressbar import BasicProgressBar ,DiscordProgressBar
+from .basicprogressbar import BasicProgressBar
+from .discordprogressbarasync import DiscordProgressBarAsync
+from .discordprogressbar import DiscordProgressBar

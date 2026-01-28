@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="basicprogressbar",
-    version="1.0.0-beta",
+    version="1.0.1",
     author="Sumiza",
     author_email="sumiza@gmail.com",
     description="Basic progress bar and discord progress bar",
@@ -24,6 +24,10 @@ setuptools.setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.14',
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],

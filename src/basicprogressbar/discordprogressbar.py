@@ -33,9 +33,10 @@ class DiscordProgressBar(BasicProgressBar):
     def send(self):
         import requests
         import time
+        builtbar = self.bar()
         if self.messtime+self.throttle <= time.time() or self.current == self.total:
             webhook = "https://discord.com/api/webhooks/"+self.idtoken
-            data = {"content": f"{self.bar()}", "username": f"{self.disuser}"}
+            data = {"content": f"{builtbar}", "username": f"{self.disuser}"}
             if self.messid == "":
                 try:
                     resp = requests.post(

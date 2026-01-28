@@ -33,10 +33,11 @@ class DiscordProgressBarAsync(BasicProgressBar):
     async def send(self):
         import httpx
         import time
-        client = httpx.AsyncClient()
+        builtbar = self.bar()
         if self.messtime+self.throttle <= time.time() or self.current == self.total:
+            client = httpx.AsyncClient()
             webhook = "https://discord.com/api/webhooks/"+self.idtoken
-            data = {"content": f"{self.bar()}", "username": f"{self.disuser}"}
+            data = {"content": f"{builtbar}", "username": f"{self.disuser}"}
             if self.messid == "":
                 try:
                     resp = await client.post(
@@ -52,5 +53,5 @@ class DiscordProgressBarAsync(BasicProgressBar):
                 except:
                     pass
             self.messtime = time.time()
-        await client.aclose()
+            await client.aclose()
         return self.messid, self.messtime

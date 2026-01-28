@@ -1,11 +1,12 @@
 """
-    Basic progress bar with no dependencies*
+    Basic progress bar
 """
+import time
 
 
 class BasicProgressBar:
     """
-        Basic progress bar with no dependencies
+        Basic progress bar
     """
 
     def __init__(self,
@@ -15,7 +16,8 @@ class BasicProgressBar:
                  pretext: str = "Progress:",
                  length: int = 60,
                  endtext: str = "",
-                 endline: str = '\r'):
+                 endline: str = '\r',
+                 showtimer=False):
 
         self.current = current
         self.total = total
@@ -26,11 +28,38 @@ class BasicProgressBar:
         self.endline = endline
         self.barfill = None
         self.percent = None
+        self.remainingtime = ""
+        self.showtimer = showtimer
+        if self.showtimer:
+            import time
+            self.timerlist = []
 
     def buildbar(self):
         """
             Generate Progress Bar
         """
+
+        if self.showtimer:
+            """
+                timer calculations
+            """
+            
+            self.timerlist.append(time.time())
+            while len(self.timerlist) > 10:
+                self.timerlist.pop(0)
+            avgtime = 0
+            for i in self.timerlist:
+                avgtime += i
+            if len(self.timerlist) > 2:
+                diff = round(sum([self.timerlist[i+1]-self.timerlist[i]
+                             for i in range(len(self.timerlist)-1)])/(len(self.timerlist)-1), 2)
+                diff = int(round(diff*(self.total-self.current), 0))
+                try:
+                    import secondstotext
+                    self.remainingtime = " " + str(secondstotext.Sectxt(diff))
+                except:
+                    self.remainingtime = " " + str(diff) + ' Seconds'
+
         if self.total == -1:  # endless progress bar
             if self.barfill == None or self.barfill[0] == "█":
                 barchar = "░██░"
@@ -44,11 +73,12 @@ class BasicProgressBar:
             self.barfill = "█"*barlen+"░"*(self.length-barlen)
             if self.total == self.current:  # bar is full
                 self.endline = '\n'  # newline at end when bar is full
+                self.remainingtime = ""
                 if self.endtext != "":
                     self.posttext = self.endtext+" " * \
                         (len(str(self.posttext))-len(str(self.endtext)))
                     # add space to posttext if it is shorter than endtext
-            return f"{self.pretext} {self.barfill} {self.percent}% [{self.current}/{self.total}] {self.posttext}"
+            return f"{self.pretext} {self.barfill} {self.percent}% [{self.current}/{self.total}]{' ' + self.posttext if self.posttext else ''}{self.remainingtime}"
 
     def bar(self, printbar: bool = False):
         """
@@ -68,7 +98,3 @@ class BasicProgressBar:
             self.bar(True)
         else:
             return self.buildbar()
-
-
-
-

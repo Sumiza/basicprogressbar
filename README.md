@@ -1,13 +1,16 @@
 # Basic Progress Bar
-Progress bar with no dependencies.
+Progress bar for console and discord
+
 
 [![Pypi](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Sumiza/basicprogressbar/actions/workflows/python-publish.yml)
 ![PyPI](https://img.shields.io/pypi/v/basicprogressbar)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/basicprogressbar)
 
+
 <br/>
 
 installation:
+##### Dependencies: secondstotext for pretty time, not required
 ```python
 from basicprogressbar import BasicProgressBar
 ```
@@ -21,13 +24,14 @@ Arguments:
     length:int=60           # length of the bar
     endtext:str=""          # text after the bar when done
     endline:str='\r'        # endline character to rewite same line
+    showtime:bool=False     # show remaining time
 ```
 
 Basic Examples:
 
 ```python
-prog = BasicProgressBar(1,10,pretext="Before bar:")
-for i in range(11):
+prog = BasicProgressBar(1, 50, pretext="Before bar:", showtimer=True)
+for i in range(51):
     time.sleep(0.1)
     prog.current = i
     prog.endtext = (f"I ended on {i}")
@@ -35,32 +39,35 @@ for i in range(11):
 
 for i in range(11):
     time.sleep(0.1)
-    BasicProgressBar(i,10).bar(True)
+    BasicProgressBar(i, 10).bar(True)
 
-prog = BasicProgressBar(1,10)
+prog = BasicProgressBar(1, 10)
 for i in range(11):
     time.sleep(0.1)
     prog.current = i
     prog.posttext = f"processing {i}"
-    print(prog.bar(),end=prog.endline)
+    print(prog.bar(), end=prog.endline)
 
 prog = BasicProgressBar()
-for i in range(10):
+for i in range(25):
     time.sleep(0.1)
-    print(prog.next(),end="\r")
+    print(prog.next(), end="\r")
 print()
 ```
 <br/>
 
 # Discord Progress Bar:
 Progress bar for discord
-##### Dependencies: requests, time
 <br/>
 
 installation:
+##### Dependencies: requests
 ```python
 from basicprogressbar import DiscordProgressBar
 ```
+
+
+
 Arguments:
 ```python
     # All the arguments of from BasicProgressBar first
@@ -72,8 +79,6 @@ Arguments:
     messid:str=""               # message id to edit line
     timeout:float=10.0          # discord timeout
 ```
-
-Examples:
 ```python
 # all examples from BasicProgressBar apply
 token = "23135245523/f43faDSAF-FEAfe24f3qfq-2yfbB-agdagADGA-g334t34gqarGS"
@@ -94,4 +99,28 @@ prog = DiscordProgressBar(total=100, idtoken=token)
 for i in range(1,101):
     time.sleep(0.1)
     prog.next()
+```
+
+
+## For Async use:
+##### Dependencies: httpx, asyncio
+```python
+from basicprogressbar import class DiscordProgressBarAsync
+```
+
+```python
+# Async Examples
+import asyncio
+
+token = "23135245523/f43faDSAF-FEAfe24f3qfq-2yfbB-agdagADGA-g334t34gqarGS"
+
+prog = basicprogressbar.DiscordProgressBarAsync(1,100, idtoken=token)
+
+async def sending():
+    for i in range(1, 51):
+        prog.current = i
+        await prog.send()
+        await asyncio.sleep(1)
+
+asyncio.run(sending())
 ```

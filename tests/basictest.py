@@ -1,8 +1,8 @@
 from basicprogressbar import BasicProgressBar
 import time
 
-prog = BasicProgressBar(1,10,pretext="Before bar:")
-for i in range(11):
+prog = BasicProgressBar(1, 50, pretext="Before bar:", showtimer=True)
+for i in range(51):
     time.sleep(0.1)
     prog.current = i
     prog.endtext = (f"I ended on {i}")
@@ -10,17 +10,17 @@ for i in range(11):
 
 for i in range(11):
     time.sleep(0.1)
-    BasicProgressBar(i,10).bar(True)
+    BasicProgressBar(i, 10).bar(True)
 
-prog = BasicProgressBar(1,10)
+prog = BasicProgressBar(1, 10)
 for i in range(11):
     time.sleep(0.1)
     prog.current = i
     prog.posttext = f"processing {i}"
-    print(prog.bar(),end=prog.endline)
+    print(prog.bar(), end=prog.endline)
 
 prog = BasicProgressBar()
-for i in range(10):
+for i in range(25):
     time.sleep(0.1)
-    print(prog.next(),end="\r")
+    print(prog.next(), end="\r")
 print()

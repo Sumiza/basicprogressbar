@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="basicprogressbar",
-    version="1.1.0",
+    version="1.1.1",
     author="Sumiza",
     author_email="sumiza@gmail.com",
     description="Basic progress bar and discord progress bar",
@@ -19,10 +19,6 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/Sumiza/basicprogressbar/issues",
     },
     classifiers=[
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
@@ -33,5 +29,11 @@ setuptools.setup(
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
-    python_requires=">=3.6",
+    python_requires=">=3.10",
+    extra_require = {
+        "timer": ["secondstotext"],
+        "discord": ["requests"],
+        "async": ["httpx"],
+        "all": ["secondstotext","requests","httpx"]
+    }
 )

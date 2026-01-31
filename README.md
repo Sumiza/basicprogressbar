@@ -10,7 +10,11 @@ Progress bar for console and discord
 <br/>
 
 installation:
-##### Dependencies: secondstotext for pretty time, not required
+```bash
+pip install basicprogressbar        # for basic features
+pip install basicprogressbar[timer] # for pretty time support
+pip install basicprogressbar[all]   # for all features
+```
 ```python
 from basicprogressbar import BasicProgressBar
 ```
@@ -61,7 +65,9 @@ Progress bar for discord
 <br/>
 
 installation:
-##### Dependencies: requests
+```bash
+pip install basicprogressbar[discord]
+```
 ```python
 from basicprogressbar import DiscordProgressBar
 ```
@@ -104,6 +110,9 @@ for i in range(1,101):
 
 ## For Async use:
 ##### Dependencies: httpx, asyncio
+```bash
+pip install basicprogressbar[async]
+```
 ```python
 from basicprogressbar import class DiscordProgressBarAsync
 ```

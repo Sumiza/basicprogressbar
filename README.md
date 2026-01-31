@@ -109,7 +109,6 @@ for i in range(1,101):
 
 
 ## For Async use:
-##### Dependencies: httpx, asyncio
 ```bash
 pip install basicprogressbar[async]
 ```
